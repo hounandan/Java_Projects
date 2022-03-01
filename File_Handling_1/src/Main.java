@@ -6,8 +6,12 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String source = "/home/hounandan/Desktop/SourceFolder";
+        /*
+        Source - The source file directory: The SourceFolder will have some file in it (Eg: file1.txt etc)
+        destination - Creating a new Directory: A folder with Timestamp
+         */
 
+        String source = "/home/hounandan/Desktop/SourceFolder";
         String timeStamp = String.valueOf(LocalDateTime.now());
         String destination = "/home/hounandan/Desktop/" + timeStamp;
 
@@ -18,7 +22,7 @@ public class Main {
         if(sFile.isDirectory()){
 
             if(!dFile.exists()){
-                dFile.mkdir();
+                dFile.mkdir(); // Creating the destination directory
             }
 
             File[] sfiles = sFile.listFiles();
