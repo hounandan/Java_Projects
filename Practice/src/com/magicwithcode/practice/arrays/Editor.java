@@ -1,11 +1,16 @@
 package com.magicwithcode.practice.arrays;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
 public class Editor {
 
 
     public static void main(String[] args) {
 
-        int[] arr = {2,3,1,2,3};
+        int[] arr = {12, 11, 40, 12, 5, 6, 5, 12, 11};
 
         findDuplicates(arr);
 
@@ -13,22 +18,25 @@ public class Editor {
 
     private static void findDuplicates(int[] arr) {
 
-        int length = arr.length;
+        Map<Integer, Integer> occurrence = new TreeMap<>();
 
-        for(int i=0; i<length; i++){
+        int count = 0;
+        for(int i=0; i<arr.length; i++){
 
-            arr[arr[i] % length] = arr[arr[i] % length] + length;
-            printArray(arr);
-            System.out.println();
-
+            if(occurrence.containsKey(arr[i])){
+                count = occurrence.get(arr[i]);
+                occurrence.put(arr[i], count + 1);
+            }else{
+                occurrence.put(arr[i],1);
+            }
         }
 
-        System.out.println();
+        for(Map.Entry<Integer, Integer> i : occurrence.entrySet()){
 
-        for(int i=0; i<length; i++){
-            if(arr[i] >= length * 2){
-                System.out.print(i + " ");
+            if(i.getValue() > 1){
+                System.out.print(i.getKey() + " ");
             }
+
         }
 
     }
