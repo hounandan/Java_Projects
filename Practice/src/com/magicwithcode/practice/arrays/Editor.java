@@ -6,32 +6,33 @@ public class Editor {
 
     public static void main(String[] args) {
 
-        int[] arr = {12, 11, 40, 12, 5, 6, 5, 12, 11};
+        int[] arr = {1,2,3};
 
-        sortArray(arr);
+        int result = findPeakElement(arr);
+        System.out.println(result);
 
     }
 
-    private static void sortArray(int[] arr) {
+    private static int findPeakElement(int[] arr){
 
-        int temp;
-        label: for(int i=0; i<arr.length; i++){
+        if(arr.length == 1) return 0;
 
-            for(int j=i+1; j< arr.length; j++){
+        for(int i=0; i<arr.length; i++){
 
-                if(arr[i] > arr[j]){
-                    temp = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = temp;
-                }
-                printArray(arr);
-                System.out.println();
+            if(i==0){
+                if(arr[i] >= arr[i+1]) return i;
             }
-            System.out.println("Iteration: "+i);
+
+            if(i>0 && i<arr.length-1){
+                if(arr[i]>=arr[i+1] && arr[i]>=arr[i-1]) return i;
+            }
+
+            if(i==arr.length-1){
+                if(arr[i]>=arr[i-1]) return i;
+            }
 
         }
-
-
+        return -1;
     }
 
     private static void printArray(int[] arr) {
