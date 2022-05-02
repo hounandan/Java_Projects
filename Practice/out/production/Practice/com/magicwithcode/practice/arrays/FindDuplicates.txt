@@ -1,0 +1,100 @@
+#1 Using the Given array - without using hash-Map
+
+public class Editor {
+
+
+    public static void main(String[] args) {
+
+        int[] arr = {2,3,1,2,3};
+
+        findDuplicates(arr);
+
+    }
+
+    private static void findDuplicates(int[] arr) {
+
+        int length = arr.length;
+
+        for(int i=0; i<length; i++){
+
+            arr[arr[i] % length] = arr[arr[i] % length] + length;
+            printArray(arr);
+            System.out.println();
+
+        }
+
+        System.out.println();
+
+        for(int i=0; i<length; i++){
+            if(arr[i] >= length * 2){
+                System.out.print(i + " ");
+            }
+        }
+
+    }
+
+    private static void printArray(int[] arr) {
+        for(int i: arr) System.out.print(i + " ");
+    }
+
+
+}
+
+
+
+===================================================================
+#2 Using Map Interface (HashMap and LinkedHashMap)
+
+
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+public class Editor {
+
+
+    public static void main(String[] args) {
+
+        int[] arr = {12, 11, 40, 12, 5, 6, 5, 12, 11};
+
+        findDuplicates(arr);
+
+    }
+
+    private static void findDuplicates(int[] arr) {
+
+        Map<Integer, Integer> occurrence = new LinkedHashMap<>();
+
+        int count = 0;
+        for(int i=0; i<arr.length; i++){
+
+            if(occurrence.containsKey(arr[i])){
+                count = occurrence.get(arr[i]);
+                occurrence.put(arr[i], count + 1);
+            }else{
+                occurrence.put(arr[i],1);
+            }
+        }
+
+        for(Map.Entry<Integer, Integer> i : occurrence.entrySet()){
+
+            if(i.getValue() > 1){
+                System.out.print(i.getKey() + " ");
+            }
+
+        }
+
+    }
+
+    private static void printArray(int[] arr) {
+        for(int i: arr) System.out.print(i + " ");
+    }
+
+
+}
+
+Note:
+* If you care about the insertion order - use LinkedHashmap
+* else you can use HashMap - which is unordered and unsorted
+* use TreeMap - to the output list to be sorted.
+
