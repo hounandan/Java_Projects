@@ -1,38 +1,48 @@
 package com.magicwithcode.practice.arrays;
 
 
+import java.util.HashMap;
+
 public class Editor {
 
 
     public static void main(String[] args) {
 
-        int[] arr = {1,2,3};
+        int[] arr = {1,5,7,1};
 
-        int result = findPeakElement(arr);
+        int result = getPairsCount(arr,4,6);
         System.out.println(result);
+
+
 
     }
 
-    private static int findPeakElement(int[] arr){
+    private static int getPairsCount(int[] arr, int n, int k){
 
-        if(arr.length == 1) return 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
 
+        int count;
         for(int i=0; i<arr.length; i++){
 
-            if(i==0){
-                if(arr[i] >= arr[i+1]) return i;
+            if(map.containsKey(arr[i])){
+                count = map.get(arr[i]);
+                map.put(arr[i], count+1);
+            }else{
+                map.put(arr[i],1);
             }
-
-            if(i>0 && i<arr.length-1){
-                if(arr[i]>=arr[i+1] && arr[i]>=arr[i-1]) return i;
-            }
-
-            if(i==arr.length-1){
-                if(arr[i]>=arr[i-1]) return i;
-            }
-
         }
-        return -1;
+        System.out.println(map);
+
+        int result=0;
+        for(int i=0; i<arr.length; i++){
+            if(null != map.get(k - arr[i]) ){
+                result += map.get(k - arr[i]);
+            }
+
+            if(k - arr[i] == arr[i]) result--;
+        }
+
+        return result/2;
     }
 
     private static void printArray(int[] arr) {
