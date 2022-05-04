@@ -1,48 +1,41 @@
 package com.magicwithcode.practice.arrays;
 
 
-import java.util.HashMap;
-
 public class Editor {
 
 
     public static void main(String[] args) {
 
-        int[] arr = {1,5,7,1};
+        int[] arr = {2,4,7,8,9,10};
 
-        int result = getPairsCount(arr,4,6);
-        System.out.println(result);
-
+        convertToWave(arr);
+        printArray(arr);
 
 
     }
 
-    private static int getPairsCount(int[] arr, int n, int k){
+    private static void convertToWave(int[] a){
 
-        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int i = 0; i< a.length; i+=2){
 
-        int count;
-        for(int i=0; i<arr.length; i++){
-
-            if(map.containsKey(arr[i])){
-                count = map.get(arr[i]);
-                map.put(arr[i], count+1);
-            }else{
-                map.put(arr[i],1);
-            }
-        }
-        System.out.println(map);
-
-        int result=0;
-        for(int i=0; i<arr.length; i++){
-            if(null != map.get(k - arr[i]) ){
-                result += map.get(k - arr[i]);
+            if(i>0 && a[i-1] > a[i]){
+                swapElements(a, i-1, i);
             }
 
-            if(k - arr[i] == arr[i]) result--;
+            if(i< a.length-1 && a[i+1] > a[i]){
+                swapElements(a, i+1, i);
+            }
+
         }
 
-        return result/2;
+    }
+
+    private static void swapElements(int[] arr, int first, int last){
+
+        int temp = arr[first];
+        arr[first] = arr[last];
+        arr[last] = temp;
+
     }
 
     private static void printArray(int[] arr) {
