@@ -1,0 +1,93 @@
+
+
+/*
+Solution:
+
+The idea is based on the fact that if we make sure that all even positioned (at index 0, 2, 4, ..) elements are greater than their adjacent odd elements, we don't need to worry about odd positioned element. Following are simple steps.
+1) Traverse all even positioned elements of input array, and do following.
+....a) If current element is smaller than previous odd element, swap previous and current.
+....b) If current element is smaller than next odd element, swap next and current.
+
+*/
+
+
+
+import java.io.*;
+import java.util.*;
+
+
+class IntArray
+{
+    public static int[] input(BufferedReader br, int n) throws IOException
+    {
+        String[] s = br.readLine().trim().split(" ");
+        int[] a = new int[n];
+        for(int i = 0; i < n; i++)
+            a[i] = Integer.parseInt(s[i]);
+
+        return a;
+    }
+
+    public static void print(int[] a)
+    {
+        for(int e : a)
+            System.out.print(e + " ");
+        System.out.println();
+    }
+
+    public static void print(ArrayList<Integer> a)
+    {
+        for(int e : a)
+            System.out.print(e + " ");
+        System.out.println();
+    }
+}
+
+class GFG {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t;
+        t = Integer.parseInt(br.readLine());
+        while(t-- > 0){
+
+            int n;
+            n = Integer.parseInt(br.readLine());
+
+
+            int[] a = IntArray.input(br, n);
+
+            Solution obj = new Solution();
+            obj.convertToWave(n, a);
+        }
+    }
+}
+// } Driver Code Ends
+
+
+
+class Solution {
+    public static void convertToWave(int n, int[] a) {
+        // code here
+        for(int i = 0; i< a.length; i+=2){
+
+            if(i>0 && a[i-1] > a[i]){
+                swapElements(a, i-1, i);
+            }
+
+            if(i< a.length-1 && a[i+1] > a[i]){
+                swapElements(a, i+1, i);
+            }
+
+        }
+        IntArray.print(a);
+    }
+
+    private static void swapElements(int[] arr, int first, int last){
+
+        int temp = arr[first];
+        arr[first] = arr[last];
+        arr[last] = temp;
+
+    }
+
+}

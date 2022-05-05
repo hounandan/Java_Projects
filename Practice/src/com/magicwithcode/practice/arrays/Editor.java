@@ -1,106 +1,51 @@
 package com.magicwithcode.practice.arrays;
 
+class Editor{
 
-import java.util.*;
+    public static void main(String[] args) {
 
-class TwoStack
-{
+        int[] arr = {1,6,7,8,9,9};
 
-    int size;
-    int top1,top2;
-    //int arr[] = new int[size];
-    int arr[] = new int[100];
+        int result = firstRepeated(arr);
+        System.out.println(result);
 
-    TwoStack()
-    {
-        int n =100;
-        size = n;
-        //arr[] = new int[n];
-        top1 = -1;
-        top2 = size;
+
     }
 
+    private static int firstRepeated(int[] arr) {
 
-    public static void main(String args[])
-    {
-        Scanner sc = new Scanner(System.in);
-        int T = sc.nextInt();
-        while(T>0)
-        {
-            TwoStack sq = new TwoStack();
-
-            int Q = sc.nextInt();
-            while(Q>0)
-            {
-                int stack_no = sc.nextInt();
-                int QueryType = sc.nextInt();
-
-                Stacks g = new Stacks();
-
-                if(QueryType == 1)
-                {
-                    int a = sc.nextInt();
-                    if(stack_no == 1)
-                        g.push1(a,sq);
-                    else if(stack_no ==2)
-                        g.push2(a,sq);
-                }else if(QueryType == 2)
-                {
-                    if(stack_no==1)
-                        System.out.print(g.pop1(sq)+" ");
-                    else if(stack_no==2)
-                        System.out.print(g.pop2(sq)+" ");
-                }
-
-                Q--;
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
             }
-            System.out.println();
-            T--;
         }
-    }
-}
+        System.out.println(max);
+        printArray(arr);
+        System.out.println();
 
-class Stacks
-{
-    void push1(int x, TwoStack sq)
-    {
-        sq.top1++;
-        if(sq.top1>=sq.top2){
-            sq.top1--;
-            return;
-        }else{
-            sq.arr[sq.top1] = x;
+        int[] temp = new int[max + 1];
+
+        for(int i=0; i<arr.length; i++){
+            int num = arr[i];
+            temp[num]++;
         }
-    }
+        printArray(temp);
+        System.out.println();
 
-    //Function to push an integer into the stack2.
-    void push2(int x, TwoStack sq)
-    {
-        sq.top2--;
-        if(sq.top2<= sq.top1){
-            sq.top2++;
-            return;
-        }else {
-            sq.arr[sq.top2] = x;
-        }
-    }
-
-    //Function to remove an element from top of the stack1.
-    int pop1(TwoStack sq)
-    {
-        if(sq.top1<0) return -1;
-        else{
-            return sq.arr[sq.top1--];
+        for(int i=0; i<arr.length;i++){
+            int num = arr[i];
+            System.out.println("Num: "+num+" ; temp["+num+"]: "+temp[num]);
+            if(temp[num]>1){
+                return i;
+            }
         }
 
+        return -1;
     }
 
-    //Function to remove an element from top of the stack2.
-    int pop2(TwoStack sq)
-    {
-        if(sq.top2>=100) return -1;
-        else{
-            return sq.arr[sq.top2++];
-        }
+    private static void printArray(int[] arr){
+        for(int i: arr) System.out.print(i + " ");
     }
+
 }
