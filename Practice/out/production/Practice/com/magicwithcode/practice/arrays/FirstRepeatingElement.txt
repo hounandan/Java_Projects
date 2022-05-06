@@ -1,0 +1,63 @@
+#1 Solution:
+
+public static int firstRepeated(int[] arr, int n) {
+        // Your code here
+        for(int i=0; i<arr.length-1; i++){
+
+            for(int j=i+1; j<arr.length; j++){
+
+                if(arr[i] == arr[j]) return i+1;
+
+            }
+
+        }
+        return -1;
+    }
+
+* But time limit is exceeding - Going for Efficient approach
+
+=================================================================
+
+#2 Solution:
+
+* Form an hash map with array - Yeah it doesn't make any sense
+* Find the max element in the given array - max
+* Now form a temp array of size max+1
+* So, the temp array has o to max+1 indexes now
+* take an element in given array - take the corresponding index in temp array -
+    increment the value in that index
+* by doing so, in the temp array - we have the count of each element in the given array with the indexes as the actual
+    element in the given array
+* Now, we have take the first appearance of the repetitive element in the given array.
+* Choose the element from the given array - take out the actual count from temp array - if its greater than one -
+    print the index, as it is the actual element in the given array
+
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+        }
+        System.out.println(max);
+        printArray(arr);
+        System.out.println();
+
+        int[] temp = new int[max + 1];
+
+        for(int i=0; i<arr.length; i++){
+            int num = arr[i];
+            temp[num]++;
+        }
+        printArray(temp);
+        System.out.println();
+
+        for(int i=0; i<arr.length;i++){
+            int num = arr[i];
+            System.out.println("Num: "+num+" ; temp["+num+"]: "+temp[num]);
+            if(temp[num]>1){
+                return i;
+            }
+        }
+
+        return -1;
+

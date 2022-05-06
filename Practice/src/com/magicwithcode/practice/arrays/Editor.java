@@ -1,47 +1,54 @@
 package com.magicwithcode.practice.arrays;
 
+import java.util.HashMap;
+import java.util.Map;
+
 class Editor{
 
     public static void main(String[] args) {
 
-        int[] arr = {1,6,7,8,9,9};
+        long[] a1 = {11, 1, 13, 21, 3, 7, 3};
+        long[] a2 = {11, 3, 7, 1, 3};
 
-        int result = firstRepeated(arr);
+        String result = isSubset(a1, a2);
         System.out.println(result);
 
 
     }
 
-    private static int firstRepeated(int[] arr) {
+    private static String isSubset(long[] a1, long[] a2) {
 
-        int max = Integer.MIN_VALUE;
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] > max) {
-                max = arr[i];
+
+        Map<Long, Integer> map = new HashMap<>();
+
+        for(int i=0; i< a1.length; i++){
+
+            if(map.containsKey(a1[i])){
+                int count = map.get(a1[i]);
+                map.put(a1[i], count+1 );
+            }else{
+                map.put(a1[i],1 );
             }
+
         }
-        System.out.println(max);
-        printArray(arr);
-        System.out.println();
+        System.out.println(map);
 
-        int[] temp = new int[max + 1];
+        for(int i=0; i<a2.length; i++){
 
-        for(int i=0; i<arr.length; i++){
-            int num = arr[i];
-            temp[num]++;
-        }
-        printArray(temp);
-        System.out.println();
-
-        for(int i=0; i<arr.length;i++){
-            int num = arr[i];
-            System.out.println("Num: "+num+" ; temp["+num+"]: "+temp[num]);
-            if(temp[num]>1){
-                return i;
+            if(map.containsKey(a2[i])){
+                if(map.get(a2[i]) >0){
+                    int count = map.get(a2[i]);
+                    map.put(a2[i], count-1 );
+                }else{
+                    return "NO";
+                }
+            }else{
+                return "NO";
             }
+
         }
 
-        return -1;
+        return "YES";
     }
 
     private static void printArray(int[] arr){
