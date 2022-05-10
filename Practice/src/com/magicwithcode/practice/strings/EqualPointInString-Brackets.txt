@@ -1,0 +1,93 @@
+Problem:
+Given - A String with only '(' and ')'
+To Find - an equal point where '(' in the right side of the index is equal to ')' in the left side
+    of the index
+
+
+#1 Solution
+* To interate with all index in the string
+* With that index as mid point - find the no of '(' left of midpoint and ')' right of the midpoint
+* print the index where the left and right are equal
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+	public static void main(String[] args) throws IOException
+	{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(br.readLine().trim()); // Inputting the testcases
+        while(t-->0)
+        {
+            String str = br.readLine();
+
+            Solution obj = new Solution();
+            System.out.println(obj.countSub(str));
+
+        }
+	}
+}
+
+// } Driver Code Ends
+
+
+//User function Template for Java
+
+class Solution {
+    public long countSub(String str) {
+        // Your code goes here
+
+        if(str.length()==1 && str.charAt(0)=='(') return 0;
+        if(str.length()==1 && str.charAt(0)==')') return 1;
+
+
+        int left=0, right=0;
+
+        int result = str.length();
+        for(int i=0; i<str.length(); i++){
+
+            left=0;
+            right=0;
+
+            for(int x=0; x<=i; x++){
+                if(str.charAt(x) == '(') left++;
+            }
+
+            for(int y=str.length()-1; y>i; y-- ){
+                if(str.charAt(y) == ')') right++;
+            }
+
+            if(left == right) result = i;
+            // System.out.println(left +" "+ right);
+
+        }
+
+        if(result == str.length()) return result;
+        else return result+1;
+
+    }
+}
+
+
+#2 Solution:
+* This is an pure algorithm that I don't understand
+* But I have worked few examples and all are working fine
+* Beautiful mystery
+
+class Solution {
+    public long countSub(String str) {
+        // Your code goes here
+
+        int right=0;
+        for(int i=0; i<str.length(); i++){
+            if(str.charAt(i) == ')') right++;
+        }
+
+        for(int i=0; i<str.length(); i++){
+            if(right == i) return i;
+        }
+
+        return str.length();
+    }
+}

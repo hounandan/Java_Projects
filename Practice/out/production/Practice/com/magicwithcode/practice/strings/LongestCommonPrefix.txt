@@ -1,0 +1,54 @@
+Problem:
+Given an array of Strings, Find the common prefix among all of it
+
+#1 Solution : Word by word matching
+https://www.geeksforgeeks.org/longest-common-prefix-using-word-by-word-matching/
+
+* We use associative property - i.e first take two strings and find the common prefix
+    Then, with the found prefix, compare it with the 3rd String and find common prefix and so on
+* The approach work but does not fullfill the time and space limit
+
+class Editor{
+
+    public static void main(String[] args) {
+
+        String[] arr = {"geeksforgeeks", "geeks", "geek",
+                "geeker"};
+
+        String result = longestCommonPrefix(arr);
+        System.out.println(result);
+
+    }
+
+    private static String longestCommonPrefix(String[] arr){
+
+        String result = arr[0];
+        for(int i=1; i<arr.length; i++){
+            result = findCommonPrefix(result, arr[i]);
+        }
+        return result;
+    }
+
+    private static String findCommonPrefix(String a, String b){
+
+        String x = "";
+        for(int i=0,j=0; i<a.length()&&j<b.length(); i++,j++){
+
+            if(a.charAt(i) != b.charAt(j)) break;
+            x = x + a.charAt(i);
+        }
+        return x;
+    }
+
+
+    private static void printArray(int[] arr){
+        for(int i: arr) System.out.print(i + " ");
+    }
+
+}
+
+============================================================================
+#2 Solution : character by character matching
+
+
+
